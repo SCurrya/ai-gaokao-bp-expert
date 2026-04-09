@@ -1,0 +1,266 @@
+{
+  "province": "Guangdong",
+  "year": "2024",
+  "data_model": "3+1+2",
+  "colleges": [
+    {
+      "name": "中山大学 (SYSU)",
+      "tier": "985/C9-ish",
+      "location": "Guangzhou/Zhuhai/Shenzhen",
+      "majors": [
+        {
+          "name": "计算机科学与技术 (CS)",
+          "min_rank_phys": 3500,
+          "min_rank_hist": 800,
+          "subject_req": "物理+化学",
+          "employment_tier": "S"
+        },
+        {
+          "name": "临床医学 (8年制)",
+          "min_rank_phys": 1200,
+          "min_rank_hist": null,
+          "subject_req": "物理+化学",
+          "employment_tier": "S+"
+        },
+        {
+          "name": "经济学",
+          "min_rank_phys": 5000,
+          "min_rank_hist": 1200,
+          "subject_req": "不限",
+          "employment_tier": "A"
+        },
+        {
+          "name": "汉语言文学",
+          "min_rank_phys": 8000,
+          "min_rank_hist": 1500,
+          "subject_req": "不限",
+          "employment_tier": "B"
+        }
+      ]
+    },
+    {
+      "name": "华南理工大学 (SCUT)",
+      "tier": "985",
+      "location": "Guangzhou",
+      "majors": [
+        {
+          "name": "软件工程",
+          "min_rank_phys": 8000,
+          "min_rank_hist": null,
+          "subject_req": "物理+化学",
+          "employment_tier": "S"
+        },
+        {
+          "name": "建筑学",
+          "min_rank_phys": 15000,
+          "min_rank_hist": null,
+          "subject_req": "物理+化学",
+          "employment_tier": "B"
+        },
+        {
+          "name": "电气工程及自动化",
+          "min_rank_phys": 10000,
+          "min_rank_hist": null,
+          "subject_req": "物理",
+          "employment_tier": "S"
+        },
+        {
+          "name": "土木工程",
+          "min_rank_phys": 35000,
+          "min_rank_hist": null,
+          "subject_req": "物理",
+          "employment_tier": "C"
+        }
+      ]
+    },
+    {
+      "name": "暨南大学 (JNU)",
+      "tier": "211",
+      "location": "Guangzhou",
+      "majors": [
+        {
+          "name": "新闻传播学",
+          "min_rank_phys": 18000,
+          "min_rank_hist": 2500,
+          "subject_req": "不限",
+          "employment_tier": "B"
+        },
+        {
+          "name": "金融学",
+          "min_rank_phys": 15000,
+          "min_rank_hist": 3000,
+          "subject_req": "不限",
+          "employment_tier": "A"
+        },
+        {
+          "name": "电子信息工程",
+          "min_rank_phys": 25000,
+          "min_rank_hist": null,
+          "subject_req": "物理",
+          "employment_tier": "A"
+        }
+      ]
+    },
+    {
+      "name": "深圳大学 (SZU)",
+      "tier": "Top Provincial",
+      "location": "Shenzhen",
+      "majors": [
+        {
+          "name": "计算机科学与技术 (Tencent Class)",
+          "min_rank_phys": 12000,
+          "min_rank_hist": null,
+          "subject_req": "物理+化学",
+          "employment_tier": "S"
+        },
+        {
+          "name": "心理学",
+          "min_rank_phys": 35000,
+          "min_rank_hist": 5000,
+          "subject_req": "不限",
+          "employment_tier": "C"
+        }
+      ]
+    },
+    {
+      "name": "广东工业大学 (GDUT)",
+      "tier": "Strong Tech Provincial",
+      "location": "Guangzhou",
+      "majors": [
+        {
+          "name": "机械设计制造及其自动化",
+          "min_rank_phys": 45000,
+          "min_rank_hist": null,
+          "subject_req": "物理",
+          "employment_tier": "B+"
+        },
+        {
+          "name": "集成电路设计与集成系统",
+          "min_rank_phys": 38000,
+          "min_rank_hist": null,
+          "subject_req": "物理+化学",
+          "employment_tier": "S"
+        }
+      ]
+    },
+    {
+      "name": "广州医科大学 (GMU)",
+      "tier": "Double First Class",
+      "location": "Guangzhou",
+      "majors": [
+        {
+          "name": "呼吸临床医学",
+          "min_rank_phys": 25000,
+          "min_rank_hist": null,
+          "subject_req": "物理+化学+生物",
+          "employment_tier": "S+"
+        }
+      ]
+    },
+    {
+      "name": "东莞理工学院 (DGUT)",
+      "tier": "Applied Provincial",
+      "location": "Dongguan",
+      "majors": [
+        {
+          "name": "人工智能",
+          "min_rank_phys": 65000,
+          "min_rank_hist": null,
+          "subject_req": "物理+化学",
+          "employment_tier": "A"
+        },
+        {
+          "name": "智能制造工程",
+          "min_rank_phys": 75000,
+          "min_rank_hist": null,
+          "subject_req": "物理",
+          "employment_tier": "B"
+        }
+      ]
+    },
+    {
+      "name": "汕头大学 (STU)",
+      "tier": "Provincial Key",
+      "location": "Shantou",
+      "majors": [
+        {
+          "name": "电子信息工程",
+          "min_rank_phys": 55000,
+          "min_rank_hist": null,
+          "subject_req": "物理",
+          "employment_tier": "A"
+        },
+        {
+          "name": "海洋科学",
+          "min_rank_phys": 85000,
+          "min_rank_hist": null,
+          "subject_req": "物理",
+          "employment_tier": "C"
+        }
+      ]
+    },
+    {
+      "name": "广东财经大学 (GDUFE)",
+      "tier": "Finance Specialist",
+      "location": "Guangzhou/Foshan",
+      "majors": [
+        {
+          "name": "会计学",
+          "min_rank_phys": 52000,
+          "min_rank_hist": 12000,
+          "subject_req": "不限",
+          "employment_tier": "A"
+        },
+        {
+          "name": "法学",
+          "min_rank_phys": 48000,
+          "min_rank_hist": 10000,
+          "subject_req": "不限",
+          "employment_tier": "A"
+        }
+      ]
+    },
+    {
+      "name": "佛山大学 (FOSU - formerly Foshan Univ)",
+      "tier": "Regional Powerhouse",
+      "location": "Foshan",
+      "majors": [
+        {
+          "name": "土木工程",
+          "min_rank_phys": 95000,
+          "min_rank_hist": null,
+          "subject_req": "物理",
+          "employment_tier": "C"
+        },
+        {
+          "name": "自动化",
+          "min_rank_phys": 82000,
+          "min_rank_hist": null,
+          "subject_req": "物理",
+          "employment_tier": "B+"
+        }
+      ]
+    },
+    {
+      "name": "广州大学 (GU)",
+      "tier": "High Growth Provincial",
+      "location": "Guangzhou",
+      "majors": [
+        {
+          "name": "网络空间安全",
+          "min_rank_phys": 35000,
+          "min_rank_hist": null,
+          "subject_req": "物理+化学",
+          "employment_tier": "S"
+        },
+        {
+          "name": "广播电视编导",
+          "min_rank_phys": 60000,
+          "min_rank_hist": 8000,
+          "subject_req": "不限",
+          "employment_tier": "B"
+        }
+      ]
+    }
+  ]
+}

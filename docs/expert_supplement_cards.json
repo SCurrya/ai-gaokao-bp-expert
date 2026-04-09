@@ -1,0 +1,82 @@
+{
+  "cards": [
+    {
+      "id": "scut_math",
+      "college": "华南理工大学 (SCUT)",
+      "major": "数学与应用数学",
+      "region_scope": "in_province",
+      "subject_combo_required": ["物理+化学"],
+      "rank_min": 3000,
+      "rank_max": 15000,
+      "fit_tags": ["理学", "数学", "省内"],
+      "priority": 10,
+      "why_fit": "985 平台 + 应用数学路线，适合理学偏好且兼顾后续转计算、金融和深造。",
+      "why_not_auto": "当前广东本地自动样本库未收录这个专业卡位，因此不能假装它来自自动检索结果。"
+    },
+    {
+      "id": "scut_applied_physics",
+      "college": "华南理工大学 (SCUT)",
+      "major": "应用物理学",
+      "region_scope": "in_province",
+      "subject_combo_required": ["物理+化学"],
+      "rank_min": 3500,
+      "rank_max": 16000,
+      "fit_tags": ["理学", "物理", "省内"],
+      "priority": 9,
+      "why_fit": "理学取向更强，同时保留华工工科生态和交叉转向空间。",
+      "why_not_auto": "该专业当前没有进入本地自动样本库，所以只能作为人工专家补充判断卡片展示。"
+    },
+    {
+      "id": "sysu_math",
+      "college": "中山大学 (SYSU)",
+      "major": "数学与应用数学",
+      "region_scope": "in_province",
+      "subject_combo_required": ["物理+化学"],
+      "rank_min": 1500,
+      "rank_max": 6500,
+      "fit_tags": ["理学", "数学", "省内"],
+      "priority": 10,
+      "why_fit": "综合强校数学平台更强，适合确定偏理学且愿意保研或深造的画像。",
+      "why_not_auto": "当前自动库对中大数学没有结构化卡位，必须单列为人工补充判断。"
+    },
+    {
+      "id": "jnu_chemistry",
+      "college": "暨南大学 (JNU)",
+      "major": "化学",
+      "region_scope": "in_province",
+      "subject_combo_required": ["物理+化学"],
+      "rank_min": 4000,
+      "rank_max": 18000,
+      "fit_tags": ["理学", "化学", "省内"],
+      "priority": 8,
+      "why_fit": "211 平台 + 化学主线，适合作为省内理学稳妥补位。",
+      "why_not_auto": "这张卡片来自人工整理，不参与自动冲稳保排序。"
+    },
+    {
+      "id": "zju_math",
+      "college": "浙江大学",
+      "major": "数学与应用数学",
+      "region_scope": "outside",
+      "subject_combo_required": ["物理+化学"],
+      "rank_min": 1,
+      "rank_max": 2500,
+      "fit_tags": ["理学", "数学", "外省"],
+      "priority": 10,
+      "why_fit": "顶级数学平台，适合高位次且接受出省的理学路线。",
+      "why_not_auto": "省外学校不在当前广东自动库中，只能走人工专家补充判断。"
+    },
+    {
+      "id": "hust_cs",
+      "college": "华中科技大学",
+      "major": "计算机科学与技术",
+      "region_scope": "outside",
+      "subject_combo_required": ["物理+化学"],
+      "rank_min": 1500,
+      "rank_max": 6000,
+      "fit_tags": ["工科", "计算机", "外省"],
+      "priority": 7,
+      "why_fit": "如果用户接受出省但仍重视就业兑现率，这是外省计算机常见稳档卡。",
+      "why_not_auto": "省外补充卡片不进入自动冲稳保排序。"
+    }
+  ]
+}

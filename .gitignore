@@ -1,0 +1,9 @@
+﻿# Ignore local runtime and editor files
+__pycache__/
+*.pyc
+*.pyo
+runtime/
+.env
+.vscode/
+.idea/
+Thumbs.db
