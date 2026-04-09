@@ -9,18 +9,18 @@ OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 WIDTH = 1600
 HEIGHT = 1000
-BG = "#f5efe5"
-INK = "#0f172a"
+BG = "#f4efe7"
+INK = "#111827"
 TEAL = "#0f766e"
-COPPER = "#d97706"
-CARD = "#fffdf8"
-MUTED = "#586174"
-LINE = "#d7d2c8"
-SOFT = "#eef7f4"
-BLUE = "#e9f0fb"
-BLUE_LINE = "#c8d5ee"
-SAND = "#fbf6ee"
-SHADOW = "#e7e1d6"
+COPPER = "#c47a17"
+CARD = "#fffdf9"
+MUTED = "#5f6b7a"
+LINE = "#ddd4c7"
+SOFT = "#edf7f4"
+BLUE = "#ebf1fb"
+BLUE_LINE = "#ced9ef"
+SAND = "#fbf4e8"
+SHADOW = "#e7dfd2"
 
 
 def load_font(size: int, bold: bool = False):
@@ -35,11 +35,11 @@ def load_font(size: int, bold: bool = False):
     return ImageFont.load_default()
 
 
-TITLE = load_font(46, bold=True)
-H2 = load_font(34, bold=True)
-H3 = load_font(26, bold=True)
-BODY = load_font(20)
-SMALL = load_font(18)
+TITLE = load_font(42, bold=True)
+H2 = load_font(32, bold=True)
+H3 = load_font(24, bold=True)
+BODY = load_font(18)
+SMALL = load_font(16)
 
 
 def rounded(draw, box, radius=28, fill=CARD, outline=LINE, width=2):
@@ -118,9 +118,15 @@ def pill(draw, xy, label, fill="#eef3f7", ink=INK):
     return x + w + 14
 
 
+def elevated_card(draw, box, radius=24, fill=CARD, outline=LINE, shadow_offset=10):
+    x1, y1, x2, y2 = box
+    draw.rounded_rectangle((x1, y1 + shadow_offset, x2, y2 + shadow_offset), radius=radius, fill=SHADOW)
+    rounded(draw, box, radius=radius, fill=fill, outline=outline)
+
+
 def metric_block(draw, box, eyebrow, title, lines, fill="#fffaf2", outline=LINE):
     x1, y1, x2, y2 = box
-    rounded(draw, box, radius=24, fill=fill, outline=outline)
+    elevated_card(draw, box, radius=24, fill=fill, outline=outline)
     text(draw, (x1 + 30, y1 + 28), eyebrow, SMALL, TEAL)
     text(draw, (x1 + 30, y1 + 68), title, H3, INK)
     draw_bullets(draw, (x1 + 30, y1 + 122), lines, BODY, MUTED, MUTED, x2 - x1 - 70, 12)
@@ -132,12 +138,20 @@ def number_badge(draw, xy, label, fill="#fff1d8", ink=COPPER):
     text(draw, (x + 15, y + 8), label, H3, ink)
 
 
+def step_card(draw, box, number, title, content, fill="#f7fbfa", outline="#cfe3db"):
+    x1, y1, x2, y2 = box
+    elevated_card(draw, box, radius=22, fill=fill, outline=outline)
+    number_badge(draw, (x1 + 28, y1 + 28), number)
+    text(draw, (x1 + 96, y1 + 24), title, H3, INK)
+    draw_wrapped_text(draw, (x1 + 96, y1 + 62), content, BODY, x2 - x1 - 130, MUTED, 8)
+
+
 def make_canvas():
     image = Image.new("RGB", (WIDTH, HEIGHT), BG)
     draw = ImageDraw.Draw(image)
-    draw.ellipse((-120, -80, 360, 320), fill="#f0d9b6")
-    draw.ellipse((1180, -100, 1680, 300), fill="#d9ece6")
-    draw.rectangle((0, 800, WIDTH, HEIGHT), fill="#efe7da")
+    draw.ellipse((-120, -80, 360, 320), fill="#efdbbf")
+    draw.ellipse((1180, -100, 1680, 300), fill="#dcece7")
+    draw.rectangle((0, 820, WIDTH, HEIGHT), fill="#eee7db")
     return image, draw
 
 
@@ -149,10 +163,7 @@ def save(image: Image.Image, name: str):
 
 def overview():
     image, draw = make_canvas()
-    rounded(draw, (60, 60, 1030, 940), fill="#fffaf2")
-    rounded(draw, (1060, 60, 1540, 300), fill=SOFT, outline="#cfe3db")
-    rounded(draw, (1060, 330, 1540, 600), fill=SAND, outline="#ead7b8")
-    rounded(draw, (1060, 630, 1540, 940), fill=BLUE, outline=BLUE_LINE)
+    elevated_card(draw, (60, 60, 1030, 940), fill="#fffaf4", outline="#e2d8c8")
 
     text(draw, (110, 110), "AI Gaokao BP Expert", SMALL, TEAL)
     title_lines = [
@@ -176,7 +187,7 @@ def overview():
     metric_block(
         draw,
         (110, 585, 980, 885),
-        "Design Principles",
+        "Product Principles",
         "核心设计原则",
         [
             "业务拆分优先于单次问答，关键步骤必须可单独审计。",
@@ -205,7 +216,7 @@ def overview():
         fill=SAND,
         outline="#ead7b8",
     )
-    rounded(draw, (1060, 630, 1540, 940), radius=24, fill=BLUE, outline=BLUE_LINE)
+    elevated_card(draw, (1060, 630, 1540, 940), radius=24, fill=BLUE, outline=BLUE_LINE)
     text(draw, (1095, 670), "一句话定位", SMALL, TEAL)
     draw_wrapped_text(
         draw,
@@ -221,23 +232,23 @@ def overview():
 
 def command_center():
     image, draw = make_canvas()
-    rounded(draw, (55, 55, 510, 940), fill="#fffaf2")
-    rounded(draw, (545, 55, 1545, 940), fill="#fffdf9")
+    elevated_card(draw, (55, 55, 500, 940), fill="#fffaf4", outline="#e2d8c8")
+    elevated_card(draw, (535, 55, 1545, 940), fill="#fffdf9", outline="#e0d8cb")
 
     text(draw, (95, 105), "Command Center", H2, TEAL)
-    rounded(draw, (90, 160, 475, 330), radius=22, fill="#ffffff", outline="#dad4c8")
+    elevated_card(draw, (90, 160, 465, 330), radius=22, fill="#ffffff", outline="#ddd4c8", shadow_offset=8)
     text(draw, (120, 195), "输入画像", SMALL, TEAL)
     draw_wrapped_text(
         draw,
         (120, 235),
         "我是广东物理化学，排位5000，普通工薪家庭，偏理学，不想土木，不可接受出省。",
         BODY,
-        300,
+        280,
         INK,
         12,
     )
 
-    rounded(draw, (90, 360, 475, 580), radius=22, fill="#f6fbf9", outline="#cfe3db")
+    elevated_card(draw, (90, 360, 465, 590), radius=22, fill="#f6fbf9", outline="#cfe3db", shadow_offset=8)
     text(draw, (120, 398), "Workflow Summary", SMALL, TEAL)
     draw_bullets(
         draw,
@@ -251,16 +262,16 @@ def command_center():
         BODY,
         INK,
         INK,
-        300,
+        280,
         12,
     )
 
     x = 95
-    x = pill(draw, (x, 620), "运行业务链路", "#fff1d8", COPPER)
-    x = pill(draw, (x, 620), "老板驾驶舱", "#edf1f7", INK)
-    pill(draw, (95, 675), "查看审计摘要", "#e5f5f0", TEAL)
+    x = pill(draw, (x, 625), "运行业务链路", "#fff1d8", COPPER)
+    x = pill(draw, (x, 625), "老板驾驶舱", "#edf1f7", INK)
+    pill(draw, (95, 680), "查看审计摘要", "#e5f5f0", TEAL)
 
-    rounded(draw, (90, 760, 475, 900), radius=22, fill=SAND, outline="#ead7b8")
+    elevated_card(draw, (90, 760, 465, 905), radius=22, fill=SAND, outline="#ead7b8", shadow_offset=8)
     text(draw, (120, 798), "交互入口", SMALL, COPPER)
     draw_bullets(
         draw,
@@ -274,22 +285,15 @@ def command_center():
     )
 
     text(draw, (585, 100), "自动结果", H2, INK)
-    rounded(draw, (580, 150, 1510, 430), radius=22, fill="#f7fbfa", outline="#cfe3db")
-    number_badge(draw, (615, 190), "1")
-    text(draw, (680, 188), "画像结构化", H3, INK)
-    draw_wrapped_text(draw, (680, 226), "广东 / 物理类 / 物理+化学 / 省内优先 / 偏理学", BODY, 760, MUTED, 8)
-    number_badge(draw, (615, 286), "2")
-    text(draw, (680, 284), "候选池筛选", H3, INK)
-    draw_wrapped_text(draw, (680, 322), "数据侦察输出：冲 5 个，稳 14 个，保 18 个。", BODY, 760, MUTED, 8)
-    number_badge(draw, (1075, 190), "3")
-    text(draw, (1140, 188), "策略与校验", H3, INK)
-    draw_wrapped_text(draw, (1140, 226), "Ban 掉土木、建筑、心理学等高风险方向，规则校验通过。", BODY, 320, MUTED, 8)
+    step_card(draw, (580, 150, 1510, 300), "1", "画像结构化", "广东 / 物理类 / 物理+化学 / 省内优先 / 偏理学", fill="#f7fbfa", outline="#cfe3db")
+    step_card(draw, (580, 325, 1510, 475), "2", "候选池筛选", "数据侦察输出：冲 5 个，稳 14 个，保 18 个。", fill="#f7fbfa", outline="#cfe3db")
+    step_card(draw, (580, 500, 1510, 650), "3", "策略与校验", "Ban 掉土木、建筑、心理学等高风险方向，规则校验通过，生成自动冲稳保结果。", fill="#f7fbfa", outline="#cfe3db")
 
-    rounded(draw, (580, 465, 1510, 700), radius=22, fill="#fff8ee", outline="#ead7b8")
-    text(draw, (615, 505), "专家补充判断卡片", H3, COPPER)
+    elevated_card(draw, (580, 680, 1510, 835), radius=22, fill="#fff8ee", outline="#ead7b8")
+    text(draw, (615, 715), "专家补充判断卡片", H3, COPPER)
     draw_bullets(
         draw,
-        (615, 555),
+        (615, 735),
         [
             "华南理工大学｜数学与应用数学",
             "中山大学｜数学与应用数学",
@@ -300,28 +304,28 @@ def command_center():
         INK,
         INK,
         820,
-        14,
+        10,
     )
 
-    rounded(draw, (580, 735, 1510, 935), radius=22, fill=BLUE, outline=BLUE_LINE)
-    text(draw, (615, 775), "边界声明", H3, INK)
+    elevated_card(draw, (580, 860, 1510, 940), radius=22, fill=BLUE, outline=BLUE_LINE)
+    text(draw, (615, 885), "边界声明", H3, INK)
     draw_bullets(
         draw,
-        (615, 825),
+        (800, 880),
         ["自动结果来自广东样本库", "库外知识单独进入补充卡片", "内部沟通记录仅展示审计摘要"],
-        BODY,
+        SMALL,
         MUTED,
         MUTED,
-        820,
-        12,
+        680,
+        6,
     )
     return save(image, "02-command-center.png")
 
 
 def trace_boardroom():
     image, draw = make_canvas()
-    rounded(draw, (55, 55, 870, 940), fill="#fffdf9")
-    rounded(draw, (910, 55, 1545, 940), fill="#f7f7fb")
+    elevated_card(draw, (55, 55, 870, 940), fill="#fffdf9", outline="#e0d8cb")
+    elevated_card(draw, (910, 55, 1545, 940), fill="#f7f7fb", outline="#d7dbe6")
 
     text(draw, (95, 100), "内部审计摘要", H2, TEAL)
     steps = [
@@ -335,7 +339,7 @@ def trace_boardroom():
     ]
     y = 165
     for idx, actor, summary in steps:
-        rounded(draw, (95, y, 830, y + 92), radius=18, fill="#ffffff", outline="#d8dde7")
+        elevated_card(draw, (95, y, 830, y + 92), radius=18, fill="#ffffff", outline="#d8dde7", shadow_offset=6)
         rounded(draw, (115, y + 20, 160, y + 65), radius=20, fill="#fff1d8", outline="#fff1d8", width=1)
         text(draw, (130, y + 28), idx, H3, COPPER)
         text(draw, (190, y + 16), actor, H3, INK)
@@ -343,7 +347,7 @@ def trace_boardroom():
         y += 104
 
     text(draw, (945, 100), "老板驾驶舱", H2, INK)
-    rounded(draw, (940, 155, 1515, 490), radius=22, fill="#fffaf2", outline="#e6d7bd")
+    elevated_card(draw, (940, 155, 1515, 490), radius=22, fill="#fffaf2", outline="#e6d7bd")
     draw_lines(
         draw,
         (970, 195),
@@ -362,7 +366,7 @@ def trace_boardroom():
         14,
     )
 
-    rounded(draw, (940, 525, 1515, 920), radius=22, fill=SOFT, outline="#cfe3db")
+    elevated_card(draw, (940, 525, 1515, 920), radius=22, fill=SOFT, outline="#cfe3db")
     text(draw, (970, 565), "审计结论", H3, TEAL)
     draw_bullets(
         draw,
