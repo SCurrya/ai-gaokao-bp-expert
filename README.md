@@ -158,16 +158,6 @@ python -m http.server 8099
 python scripts/generate_showcase_images.py
 ```
 
-## 私有部署说明
-
-这个公开版仓库只保留：
-
-- 核心多 Agent 逻辑
-- GitHub 展示页
-- 截图、文档和测试
-
-Docker / OpenClaw / 微信部署版建议继续放在你的私有仓库里，不建议公开。
-
 ## 测试
 
 ```bash
