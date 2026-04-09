@@ -17,6 +17,10 @@ CARD = "#fffdf8"
 MUTED = "#586174"
 LINE = "#d7d2c8"
 SOFT = "#eef7f4"
+BLUE = "#e9f0fb"
+BLUE_LINE = "#c8d5ee"
+SAND = "#fbf6ee"
+SHADOW = "#e7e1d6"
 
 
 def load_font(size: int, bold: bool = False):
@@ -114,6 +118,20 @@ def pill(draw, xy, label, fill="#eef3f7", ink=INK):
     return x + w + 14
 
 
+def metric_block(draw, box, eyebrow, title, lines, fill="#fffaf2", outline=LINE):
+    x1, y1, x2, y2 = box
+    rounded(draw, box, radius=24, fill=fill, outline=outline)
+    text(draw, (x1 + 30, y1 + 28), eyebrow, SMALL, TEAL)
+    text(draw, (x1 + 30, y1 + 68), title, H3, INK)
+    draw_bullets(draw, (x1 + 30, y1 + 122), lines, BODY, MUTED, MUTED, x2 - x1 - 70, 12)
+
+
+def number_badge(draw, xy, label, fill="#fff1d8", ink=COPPER):
+    x, y = xy
+    rounded(draw, (x, y, x + 46, y + 46), radius=23, fill=fill, outline=fill, width=1)
+    text(draw, (x + 15, y + 8), label, H3, ink)
+
+
 def make_canvas():
     image = Image.new("RGB", (WIDTH, HEIGHT), BG)
     draw = ImageDraw.Draw(image)
@@ -131,135 +149,171 @@ def save(image: Image.Image, name: str):
 
 def overview():
     image, draw = make_canvas()
-    rounded(draw, (60, 60, 1000, 940), fill="#fffaf2")
-    rounded(draw, (1030, 60, 1540, 285), fill="#f6fbf9", outline="#cfe3db")
-    rounded(draw, (1030, 315, 1540, 565), fill="#fff8ee", outline="#eed9ba")
-    rounded(draw, (1030, 595, 1540, 940), fill="#f7f7fb", outline="#d7dbe6")
+    rounded(draw, (60, 60, 1030, 940), fill="#fffaf2")
+    rounded(draw, (1060, 60, 1540, 300), fill=SOFT, outline="#cfe3db")
+    rounded(draw, (1060, 330, 1540, 600), fill=SAND, outline="#ead7b8")
+    rounded(draw, (1060, 630, 1540, 940), fill=BLUE, outline=BLUE_LINE)
 
-    text(draw, (110, 115), "AI Gaokao BP Expert", SMALL, TEAL)
+    text(draw, (110, 110), "AI Gaokao BP Expert", SMALL, TEAL)
     title_lines = [
-        "把高考志愿做成一套",
-        "有组织、有流程、有风控的",
-        "Agent 公司",
+        "把高考志愿分析做成",
+        "可审计、可复盘、可展示的",
+        "Multi-Agent 决策系统",
     ]
-    y = draw_lines(draw, (110, 175), title_lines, TITLE, INK, 14)
-    y += 18
-    y = draw_wrapped_text(draw, (110, y), "真实业务链路：客户经理 intake、数据侦察、策略 Ban/Pick、规则校验", BODY, 820, MUTED, 10)
+    y = draw_lines(draw, (110, 170), title_lines, TITLE, INK, 14)
+    y += 20
+    y = draw_wrapped_text(draw, (110, y), "真实业务链路由客户经理、数据侦察、策略与规则校验四类 Agent 组成。", BODY, 830, MUTED, 10)
     y += 4
-    y = draw_wrapped_text(draw, (110, y), "产品边界清晰：自动结果、人工专家补充判断、审计摘要分开展示", BODY, 820, MUTED, 10)
+    y = draw_wrapped_text(draw, (110, y), "自动结果严格限定在广东本地样本库内，库外知识独立进入专家补充卡片。", BODY, 830, MUTED, 10)
     y += 4
-    y = draw_wrapped_text(draw, (110, y), "多入口闭环：本地脚本、GitHub Pages、OpenClaw + 微信", BODY, 820, MUTED, 10)
+    y = draw_wrapped_text(draw, (110, y), "每轮分析都会落盘为审计摘要和老板驾驶舱，避免黑盒式输出。", BODY, 830, MUTED, 10)
 
     x = 110
-    x = pill(draw, (x, 520), "自动结果", "#fff1d8", COPPER)
-    x = pill(draw, (x, 520), "专家补充", "#e5f5f0", TEAL)
-    pill(draw, (x, 520), "审计摘要", "#edf1f7", INK)
+    x = pill(draw, (x, 505), "Automatic Result", "#fff1d8", COPPER)
+    x = pill(draw, (x, 505), "Expert Supplement", "#e5f5f0", TEAL)
+    pill(draw, (x, 505), "Audit Trace", "#edf1f7", INK)
 
-    rounded(draw, (110, 600, 950, 870), radius=22, fill=SOFT, outline="#cfe3db")
-    text(draw, (145, 640), "系统价值", H2, INK)
-    draw_bullets(
+    metric_block(
         draw,
-        (145, 705),
+        (110, 585, 980, 885),
+        "Design Principles",
+        "核心设计原则",
         [
-            "不是单 Prompt，而是完整 Agent workflow",
-            "有系统边界意识，避免把人工补充伪装成自动结果",
-            "有 trace、memory、校验、回归测试，能支撑工程落地",
+            "业务拆分优先于单次问答，关键步骤必须可单独审计。",
+            "自动结果与专家补充分层展示，系统边界保持清晰。",
+            "保留会话记忆、规则校验和回归测试，确保输出可落地。",
         ],
-        BODY,
-        INK,
-        INK,
-        740,
-        16,
+        fill="#f7fbfa",
+        outline="#cfe3db",
     )
 
-    text(draw, (1070, 105), "交付结果", H3, TEAL)
-    draw_bullets(draw, (1070, 155), ["冲稳保自动方案", "人工专家补充卡片", "可审计 trace"], BODY, INK, INK, 360, 10)
-
-    text(draw, (1070, 355), "核心能力", H3, COPPER)
-    draw_bullets(draw, (1070, 405), ["Multi-Agent Workflow", "Audit Trace", "Expert Supplement", "Rule Validation"], BODY, INK, INK, 360, 10)
-
-    text(draw, (1070, 635), "一句话介绍", H3, INK)
-    draw_wrapped_text(draw, (1070, 690), "把复杂业务问题做成边界清楚、可复盘、可展示的 Multi-Agent 决策系统。", BODY, 360, MUTED, 12)
+    metric_block(
+        draw,
+        (1060, 60, 1540, 300),
+        "Delivery",
+        "交付结果",
+        ["冲稳保自动方案", "专家补充判断卡片", "老板驾驶舱与审计摘要"],
+        fill=SOFT,
+        outline="#cfe3db",
+    )
+    metric_block(
+        draw,
+        (1060, 330, 1540, 600),
+        "Capabilities",
+        "核心能力",
+        ["Multi-Agent Workflow", "Rule Validation", "Audit Trace", "Structured Memory"],
+        fill=SAND,
+        outline="#ead7b8",
+    )
+    rounded(draw, (1060, 630, 1540, 940), radius=24, fill=BLUE, outline=BLUE_LINE)
+    text(draw, (1095, 670), "一句话定位", SMALL, TEAL)
+    draw_wrapped_text(
+        draw,
+        (1095, 725),
+        "把复杂、高约束的志愿决策问题，组织成边界清楚、可解释、可复盘的产品化工作流。",
+        BODY,
+        390,
+        INK,
+        12,
+    )
     return save(image, "01-overview-hero.png")
 
 
 def command_center():
     image, draw = make_canvas()
-    rounded(draw, (55, 55, 530, 940), fill="#fffaf2")
-    rounded(draw, (565, 55, 1545, 940), fill="#fffdf9")
+    rounded(draw, (55, 55, 510, 940), fill="#fffaf2")
+    rounded(draw, (545, 55, 1545, 940), fill="#fffdf9")
 
     text(draw, (95, 105), "Command Center", H2, TEAL)
-    y = draw_wrapped_text(draw, (95, 165), "输入画像", BODY, 360, INK, 12)
-    y += 8
-    for line in [
-        "我是广东物理化学，排位5000，",
-        "普通工薪家庭，偏理学，",
-        "不想土木，不可接受出省",
-    ]:
-        y = draw_wrapped_text(draw, (95, y), line, BODY, 360, INK, 12)
+    rounded(draw, (90, 160, 475, 330), radius=22, fill="#ffffff", outline="#dad4c8")
+    text(draw, (120, 195), "输入画像", SMALL, TEAL)
+    draw_wrapped_text(
+        draw,
+        (120, 235),
+        "我是广东物理化学，排位5000，普通工薪家庭，偏理学，不想土木，不可接受出省。",
+        BODY,
+        300,
+        INK,
+        12,
+    )
 
-    rounded(draw, (90, 330, 495, 520), radius=20, fill="#f6fbf9", outline="#cfe3db")
-    text(draw, (120, 370), "核心能力", H3, INK)
+    rounded(draw, (90, 360, 475, 580), radius=22, fill="#f6fbf9", outline="#cfe3db")
+    text(draw, (120, 398), "Workflow Summary", SMALL, TEAL)
     draw_bullets(
         draw,
-        (120, 430),
-        ["自动冲稳保结果", "选科校验与风险拦截", "理学偏好权重修正", "省内优先识别"],
-        BODY,
-        MUTED,
-        MUTED,
-        320,
-        10,
-    )
-    x = 95
-    x = pill(draw, (x, 580), "运行业务链路", "#fff1d8", COPPER)
-    x = pill(draw, (x, 580), "老板驾驶舱", "#edf1f7", INK)
-    pill(draw, (95, 635), "给我看内部沟通记录", "#e5f5f0", TEAL)
-
-    text(draw, (605, 100), "自动结果", H2, INK)
-    rounded(draw, (600, 150, 1510, 420), radius=22, fill="#f6fbf9", outline="#cfe3db")
-    draw_lines(
-        draw,
-        (635, 190),
+        (120, 438),
         [
-            "客户经理：广东 / 物理类 / 物理+化学 / 省内优先 / 偏理学",
-            "数据侦察：冲 5 个，稳 14 个，保 18 个",
-            "策略：Ban 掉土木、建筑、心理学等高风险方向",
-            "规则校验：通过校验，输出自动冲稳保结果",
+            "自动生成冲稳保结果",
+            "执行选科校验与风险拦截",
+            "理学偏好与省内优先权重修正",
+            "支持老板驾驶舱和内部审计摘要",
         ],
         BODY,
         INK,
-        18,
+        INK,
+        300,
+        12,
     )
 
-    rounded(draw, (600, 455, 1510, 710), radius=22, fill="#fff8ee", outline="#eed9ba")
-    text(draw, (635, 495), "人工专家补充判断卡片", H3, COPPER)
+    x = 95
+    x = pill(draw, (x, 620), "运行业务链路", "#fff1d8", COPPER)
+    x = pill(draw, (x, 620), "老板驾驶舱", "#edf1f7", INK)
+    pill(draw, (95, 675), "查看审计摘要", "#e5f5f0", TEAL)
+
+    rounded(draw, (90, 760, 475, 900), radius=22, fill=SAND, outline="#ead7b8")
+    text(draw, (120, 798), "交互入口", SMALL, COPPER)
     draw_bullets(
         draw,
-        (635, 545),
+        (120, 838),
+        ["本地脚本", "静态展示页", "自然语言入口复用同一工作流"],
+        SMALL,
+        MUTED,
+        MUTED,
+        300,
+        10,
+    )
+
+    text(draw, (585, 100), "自动结果", H2, INK)
+    rounded(draw, (580, 150, 1510, 430), radius=22, fill="#f7fbfa", outline="#cfe3db")
+    number_badge(draw, (615, 190), "1")
+    text(draw, (680, 188), "画像结构化", H3, INK)
+    draw_wrapped_text(draw, (680, 226), "广东 / 物理类 / 物理+化学 / 省内优先 / 偏理学", BODY, 760, MUTED, 8)
+    number_badge(draw, (615, 286), "2")
+    text(draw, (680, 284), "候选池筛选", H3, INK)
+    draw_wrapped_text(draw, (680, 322), "数据侦察输出：冲 5 个，稳 14 个，保 18 个。", BODY, 760, MUTED, 8)
+    number_badge(draw, (1075, 190), "3")
+    text(draw, (1140, 188), "策略与校验", H3, INK)
+    draw_wrapped_text(draw, (1140, 226), "Ban 掉土木、建筑、心理学等高风险方向，规则校验通过。", BODY, 320, MUTED, 8)
+
+    rounded(draw, (580, 465, 1510, 700), radius=22, fill="#fff8ee", outline="#ead7b8")
+    text(draw, (615, 505), "专家补充判断卡片", H3, COPPER)
+    draw_bullets(
+        draw,
+        (615, 555),
         [
             "华南理工大学｜数学与应用数学",
             "中山大学｜数学与应用数学",
             "暨南大学｜化学",
-            "说明：仅做补充判断，不混入自动排序结果",
+            "仅做补充判断，不进入自动排序结果",
         ],
         BODY,
         INK,
         INK,
-        780,
+        820,
         14,
     )
 
-    rounded(draw, (600, 730, 1510, 935), radius=22, fill="#f7f7fb", outline="#d7dbe6")
-    text(draw, (635, 785), "产品边界", H3, INK)
+    rounded(draw, (580, 735, 1510, 935), radius=22, fill=BLUE, outline=BLUE_LINE)
+    text(draw, (615, 775), "边界声明", H3, INK)
     draw_bullets(
         draw,
-        (635, 830),
-        ["自动结果来自广东样本库", "库外知识单独进入补充卡片", "内部沟通记录只展示审计摘要"],
+        (615, 825),
+        ["自动结果来自广东样本库", "库外知识单独进入补充卡片", "内部沟通记录仅展示审计摘要"],
         BODY,
         MUTED,
         MUTED,
-        780,
-        10,
+        820,
+        12,
     )
     return save(image, "02-command-center.png")
 
@@ -276,8 +330,8 @@ def trace_boardroom():
         ("3", "数据侦察 Agent", "基于广东样本库筛出冲稳保候选池"),
         ("4", "策略 Agent", "完成 Ban/Pick，并写明理学偏好与数据边界"),
         ("5", "规则校验 Agent", "执行选科校验、拦截冲突并自动补位"),
-        ("6", "人工专家补充判断", "补充库外理学高平台专业卡片"),
-        ("7", "老板", "批准对外输出自动结果 + 补充卡片 + 审计摘要"),
+        ("6", "专家补充模块", "补充库外理学高平台专业卡片"),
+        ("7", "老板驾驶舱", "批准对外输出自动结果、补充卡片与审计摘要"),
     ]
     y = 165
     for idx, actor, summary in steps:
@@ -308,17 +362,16 @@ def trace_boardroom():
         14,
     )
 
-    rounded(draw, (940, 525, 1515, 920), radius=22, fill="#eef7f4", outline="#cfe3db")
-    text(draw, (970, 565), "为什么这版更能打 JD", H3, TEAL)
+    rounded(draw, (940, 525, 1515, 920), radius=22, fill=SOFT, outline="#cfe3db")
+    text(draw, (970, 565), "审计结论", H3, TEAL)
     draw_bullets(
         draw,
         (970, 620),
         [
-            "有 workflow，不是单 Prompt",
-            "有 system boundary，不装作全国实时库",
-            "有 traceability，能做复盘与解释",
-            "有 memory / routing / validation / fallback 意识",
-            "有 GitHub 展示页和微信入口，作品感更强",
+            "主链路由 intake、候选筛选、Ban/Pick 与规则校验组成。",
+            "自动结果与专家补充严格分层，不混写能力边界。",
+            "每轮分析保留时间线和驾驶舱摘要，支持复盘与解释。",
+            "系统包含记忆、路由、校验与回归测试，具备持续迭代基础。",
         ],
         BODY,
         INK,
