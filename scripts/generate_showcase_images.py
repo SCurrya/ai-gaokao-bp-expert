@@ -40,6 +40,7 @@ H2 = load_font(32, bold=True)
 H3 = load_font(24, bold=True)
 BODY = load_font(18)
 SMALL = load_font(16)
+TINY = load_font(14)
 
 
 def rounded(draw, box, radius=28, fill=CARD, outline=LINE, width=2):
@@ -271,53 +272,53 @@ def command_center():
     x = pill(draw, (x, 625), "老板驾驶舱", "#edf1f7", INK)
     pill(draw, (95, 680), "查看审计摘要", "#e5f5f0", TEAL)
 
-    elevated_card(draw, (90, 760, 465, 905), radius=22, fill=SAND, outline="#ead7b8", shadow_offset=8)
-    text(draw, (120, 798), "交互入口", SMALL, COPPER)
+    elevated_card(draw, (90, 715, 465, 855), radius=22, fill=SAND, outline="#ead7b8", shadow_offset=8)
+    text(draw, (120, 750), "交互入口", SMALL, COPPER)
     draw_bullets(
         draw,
-        (120, 838),
-        ["本地脚本", "静态展示页", "自然语言入口复用同一工作流"],
-        SMALL,
+        (120, 790),
+        ["本地脚本", "静态展示页", "同一工作流入口复用"],
+        TINY,
         MUTED,
         MUTED,
-        300,
-        10,
+        260,
+        2,
     )
 
     text(draw, (585, 100), "自动结果", H2, INK)
-    step_card(draw, (580, 150, 1510, 300), "1", "画像结构化", "广东 / 物理类 / 物理+化学 / 省内优先 / 偏理学", fill="#f7fbfa", outline="#cfe3db")
-    step_card(draw, (580, 325, 1510, 475), "2", "候选池筛选", "数据侦察输出：冲 5 个，稳 14 个，保 18 个。", fill="#f7fbfa", outline="#cfe3db")
-    step_card(draw, (580, 500, 1510, 650), "3", "策略与校验", "Ban 掉土木、建筑、心理学等高风险方向，规则校验通过，生成自动冲稳保结果。", fill="#f7fbfa", outline="#cfe3db")
+    step_card(draw, (580, 150, 1510, 285), "1", "画像结构化", "广东 / 物理类 / 物理+化学 / 省内优先 / 偏理学", fill="#f7fbfa", outline="#cfe3db")
+    step_card(draw, (580, 315, 1510, 450), "2", "候选池筛选", "数据侦察输出：冲 5 个，稳 14 个，保 18 个。", fill="#f7fbfa", outline="#cfe3db")
+    step_card(draw, (580, 480, 1510, 615), "3", "策略与校验", "Ban 掉土木、建筑、心理学等高风险方向，规则校验通过，生成自动冲稳保结果。", fill="#f7fbfa", outline="#cfe3db")
 
-    elevated_card(draw, (580, 680, 1510, 835), radius=22, fill="#fff8ee", outline="#ead7b8")
-    text(draw, (615, 715), "专家补充判断卡片", H3, COPPER)
+    elevated_card(draw, (580, 645, 1510, 805), radius=22, fill="#fff8ee", outline="#ead7b8")
+    text(draw, (615, 680), "专家补充判断卡片", H3, COPPER)
     draw_bullets(
         draw,
-        (615, 735),
+        (615, 718),
         [
             "华南理工大学｜数学与应用数学",
             "中山大学｜数学与应用数学",
             "暨南大学｜化学",
             "仅做补充判断，不进入自动排序结果",
         ],
-        BODY,
+        TINY,
         INK,
         INK,
         820,
-        10,
+        2,
     )
 
-    elevated_card(draw, (580, 860, 1510, 940), radius=22, fill=BLUE, outline=BLUE_LINE)
-    text(draw, (615, 885), "边界声明", H3, INK)
+    elevated_card(draw, (580, 808, 1510, 934), radius=22, fill=BLUE, outline=BLUE_LINE, shadow_offset=4)
+    text(draw, (615, 840), "边界声明", H3, INK)
     draw_bullets(
         draw,
-        (800, 880),
+        (615, 872),
         ["自动结果来自广东样本库", "库外知识单独进入补充卡片", "内部沟通记录仅展示审计摘要"],
-        SMALL,
+        TINY,
         MUTED,
         MUTED,
-        680,
-        6,
+        820,
+        2,
     )
     return save(image, "02-command-center.png")
 
